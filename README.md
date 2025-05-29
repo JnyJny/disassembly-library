@@ -37,7 +37,8 @@ Internally, the Arm Disassembly Library leverages the LLVM project. The library 
 Firstly, the build script will first perform a shallow clone of LLVM and apply any required modifications/patches before building. Cloning and building LLVM is resource-heavy and requires ~5GB of disk space. This produces a static library build of LLVM with some minor changes that exposes methods within the MC component.
 
 Secondly, libarmdisasm is created by combining the LLVM build and armdisasm code into a shared object library.
-
+<!-- Original ascii drawing commented out.
+```
  ___________________           __________________
 |                   |         |                  |
 |  Python bindings  |         |   C application  |
@@ -53,6 +54,22 @@ Secondly, libarmdisasm is created by combining the LLVM build and armdisasm code
             |             |           |
             | armdisasm.c |  LLVM MC  |
             |_____________|___________|
+```
+--> 
+
+```mermaid
+block-beta
+  columns 2
+    pb["Python Bindings"]
+    cb["C Application"]
+    bparrow<[" "]>(up):1
+    cbarrow<[" "]>(up):1
+    a["libarmdisasm.so"]:2
+    b["armdisasm.c"]
+    c["LLVM MC"]
+
+
+```
 
 Once built, the resulting shared object library `libarmdisasm` can be linked and used as a component in your own C/C++ applications. The Python package can be installed to provide bindings for your Python applications.
 
